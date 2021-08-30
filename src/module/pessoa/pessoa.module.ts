@@ -1,3 +1,5 @@
+import { InternoService } from './../../service/interno/interno.service';
+import { InternoController } from './../../controller/interno/interno.controller';
 import { ResponsavelService } from './../../service/responsavel/responsavel.service';
 import { Interno } from './../../model/interno.model';
 import { Responsavel } from './../../model/responsavel.model';
@@ -10,7 +12,7 @@ import { ResponsavelController } from 'src/controller/responsavel/responsavel.co
 
 @Module({
     imports: [TypeOrmModule.forFeature([Aluno, Responsavel, Interno])],
-    providers: [AlunoService, ResponsavelService],
-    controllers: [AlunoController, ResponsavelController],
+    providers: [AlunoService, ResponsavelService, InternoService],
+    controllers: [AlunoController, ResponsavelController, InternoController],
 })
 export class PessoaModule {}
