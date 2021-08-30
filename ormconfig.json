@@ -1,0 +1,12 @@
+{
+    "type": "mysql",
+    "host": "149.56.7.254",
+    "port": 3306,
+    "username": "root",
+    "password": "alexandre2",
+    "database": "tccescola2",
+    "synchronize": true,
+    "entities": [
+        "dist/**/*.model{.ts,.js}"
+    ]
+}
