@@ -11,4 +11,6 @@ export class Aluno extends Pessoa {
     @ManyToOne(type => Responsavel, responsavel => responsavel.alunos)
     @JoinColumn({name: 'resp_cd_id'})
     responsavel: Responsavel;
+
+    
 }
