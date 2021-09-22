@@ -1,3 +1,4 @@
+import { MensagensConst } from './../../mensagem.const';
 import { jwtConstants } from './../../constants';
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
@@ -6,10 +7,12 @@ import { Responsavel } from 'src/model/responsavel.model';
 import { Repository } from 'typeorm/repository/Repository';
 import * as bcrypt from 'bcrypt';
 import { ServiceBase } from '../service';
+import { WhatsAppService } from '../whatsapp/whatsapp.service';
 
 @Injectable()
 export class ResponsavelService extends ServiceBase<Responsavel> {
     constructor(
+        private whatsappService: WhatsAppService,
         @InjectRepository(Responsavel)
         public repository: Repository<Responsavel>,
     ) {
@@ -18,6 +21,7 @@ export class ResponsavelService extends ServiceBase<Responsavel> {
 
     async create(resp: Responsavel) {
         resp.senha = await bcrypt.hash(resp.senha, jwtConstants.bcrypt_salts);
+        await this.whatsappService.enviar("+5521969416765", MensagensConst.confirmacaoCriacaoContaWhatsApp);
         super.create(resp);
     }
 }
