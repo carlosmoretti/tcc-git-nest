@@ -5,8 +5,8 @@
     "username": "root",
     "password": "alexandre2",
     "database": "tccescola2",
-    "synchronize": true,
     "entities": [
         "dist/**/*.model{.ts,.js}"
-    ]
+    ],
+    "synchronize": true
 }

@@ -13,8 +13,8 @@ export abstract class ServiceBase<T> {
         await this.service.save(obj);
     }
 
-    async update(obj: T, id: number): Promise<void> {
-        await this.service.update(id, obj);
+    async update(obj: T): Promise<void> {
+        await this.service.save(obj);
     }
 
     async remove(obj: number): Promise<void> {

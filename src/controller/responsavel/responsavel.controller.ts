@@ -13,9 +13,9 @@ export class ResponsavelController extends ControllerBase<Responsavel> {
         super(service);
     }
 
-    @Get(':id/alunos')
-    public async getAlunos(@Param('id') responsavelId) {
-        const item = await this.service.get(responsavelId);
-        return item.alunos;
-    }
+    // @Get(':id/alunos')
+    // public async getAlunos(@Param('id') responsavelId) {
+    //     const item = await this.service.get(responsavelId);
+    //     return item.alunos;
+    // }
 }

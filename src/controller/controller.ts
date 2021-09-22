@@ -21,9 +21,9 @@ export default abstract class ControllerBase<T> {
         return await this.service.create(param);
     }
 
-    @Put(':id')
-    async put(@Param('id') id: number, @Body() obj: T) {
-        return await this.service.update(obj, id);
+    @Put()
+    async put(@Body() obj: T) {
+        return await this.service.update(obj);
     }
 
     @Delete(':id')
