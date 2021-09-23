@@ -5,7 +5,7 @@ import { Entity, ChildEntity, Column, BaseEntity, ManyToMany, JoinColumn, ManyTo
 import { Pessoa } from './pessoa.model';
 
 @Entity({ name: 'aluno' })
-export class Aluno extends Pessoa {
+export class Aluno {
 
     @PrimaryGeneratedColumn({ name: 'alun_cd_id' })
     id: number;
@@ -15,4 +15,16 @@ export class Aluno extends Pessoa {
 
     @ManyToMany(() => Responsavel, (resp) => resp.alunos)
     responsavel: Responsavel[];
+
+    @Column({ name: 'alun_dt_nascimento'})
+    dataNascimento!: Date;
+
+    @Column({ name: 'alun_tx_nome' })
+    nome: string;
+
+    @Column({ name: 'alun_tx_sobrenome' })
+    sobrenome: string;
+
+    @Column({ name: 'alun_dt_inclusao'})
+    dataInclusao: Date;
 }

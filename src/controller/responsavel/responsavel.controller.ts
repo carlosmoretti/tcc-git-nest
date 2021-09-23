@@ -1,3 +1,4 @@
+import { AlunoService } from './../../service/aluno/aluno.service';
 /* eslint-disable prettier/prettier */
 import { ResponsavelService } from './../../service/responsavel/responsavel.service';
 import { Controller, Get, Param } from '@nestjs/common';
@@ -11,7 +12,9 @@ import { WhatsAppService } from 'src/service/whatsapp/whatsapp.service';
 @Controller('responsavel')
 @Public()
 export class ResponsavelController extends ControllerBase<Responsavel> {
-    constructor(public service: ResponsavelService, public whatsappService: WhatsAppService) {
+    constructor(public service: ResponsavelService, 
+        public whatsappService: WhatsAppService,
+        public alunoService: AlunoService) {
         super(service);
     }
 

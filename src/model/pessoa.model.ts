@@ -10,8 +10,11 @@ export abstract class Pessoa extends BaseEntity {
     nome: string;
 
     @Column({ name: 'pess_tx_senha' })
-    senha: string;
+    senha!: string;
 
     @Column({ name: 'pess_tx_sobrenome' })
     sobrenome: string;
+
+    @Column({ name: 'pess_dt_inclusao'})
+    dataInclusao: Date;
 }
