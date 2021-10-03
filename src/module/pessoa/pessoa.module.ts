@@ -1,3 +1,6 @@
+import { TurmaController } from './../../controller/turma/turma.controller';
+import { TurmaService } from './../../service/turma/turma.service';
+import { HomeController } from './../../controller/home/home.controller';
 /* eslint-disable prettier/prettier */
 import { InternoService } from './../../service/interno/interno.service';
 import { InternoController } from './../../controller/interno/interno.controller';
@@ -11,10 +14,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AlunoService } from './../../service/aluno/aluno.service';
 import { ResponsavelController } from 'src/controller/responsavel/responsavel.controller';
 import { WhatsAppService } from 'src/service/whatsapp/whatsapp.service';
+import { Turma } from 'src/model/turma.model';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Aluno, Responsavel, Interno])],
-    providers: [AlunoService, ResponsavelService, InternoService, WhatsAppService],
-    controllers: [AlunoController, ResponsavelController, InternoController],
+    imports: [TypeOrmModule.forFeature([Aluno, Responsavel, Interno, Turma])],
+    providers: [AlunoService, ResponsavelService, InternoService, TurmaService, WhatsAppService],
+    controllers: [AlunoController, ResponsavelController, InternoController, HomeController, TurmaController],
 })
 export class PessoaModule {}

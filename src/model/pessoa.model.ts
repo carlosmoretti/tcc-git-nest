@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { Transform } from 'class-transformer';
 import { BaseEntity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 export abstract class Pessoa extends BaseEntity {
