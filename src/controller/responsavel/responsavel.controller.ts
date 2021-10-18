@@ -1,7 +1,8 @@
-import { AlunoService } from './../../service/aluno/aluno.service';
 /* eslint-disable prettier/prettier */
+import { EmailService } from './../../service/email/email.service';
+import { AlunoService } from './../../service/aluno/aluno.service';
 import { ResponsavelService } from './../../service/responsavel/responsavel.service';
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { Responsavel } from 'src/model/responsavel.model';
 import ControllerBase from '../controller';
 import { Roles } from 'src/config/roles.config';
@@ -14,8 +15,14 @@ import { WhatsAppService } from 'src/service/whatsapp/whatsapp.service';
 export class ResponsavelController extends ControllerBase<Responsavel> {
     constructor(public service: ResponsavelService, 
         public whatsappService: WhatsAppService,
-        public alunoService: AlunoService) {
+        public alunoService: AlunoService,
+        public emailService: EmailService) {
         super(service);
+    }
+
+    @Post('email')
+    teste() {
+        this.emailService.enviar('Teste', '<h1>Teste</h1>', 'carlosmoretti2019@gmail.com');
     }
 
     // @Get(':id/alunos')

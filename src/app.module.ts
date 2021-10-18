@@ -9,9 +9,10 @@ import { InternoService } from './service/interno/interno.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TurmaService } from './service/turma/turma.service';
 import { TurmaController } from './controller/turma/turma.controller';
+import { SharedModule } from './module/shared/shared.module';
 
 @Module({
-    imports: [TypeOrmModule.forRoot(), PessoaModule, AuthModule],
+    imports: [TypeOrmModule.forRoot(), PessoaModule, AuthModule, SharedModule],
     controllers: [AppController],
     providers: [AppService],
 })

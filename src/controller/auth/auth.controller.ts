@@ -37,4 +37,9 @@ export class AuthController {
     refreshToken(@Req() request: Request) {
         return this.responsavelAuthService.refresh(request);
     }
+
+    @Post('trocasenha')
+    async trocaSenha() {
+        await this.internoAuthService.redefinicaoSenha('carlosmoretti2019@gmail.com', 'Carlos Moretti');
+    }
 }

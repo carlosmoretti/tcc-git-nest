@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+import { HistoricoTrocaSenha } from './../../model/historicotrocasenha.model';
+import { EmailService } from './../email/email.service';
 import { JwtService } from '@nestjs/jwt';
 import { Responsavel } from './../../model/responsavel.model';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,7 +14,9 @@ export class ResponsavelAuthService extends AuthService<Responsavel> {
         @InjectRepository(Responsavel)
         public repository: Repository<Responsavel>,
         public jwtService: JwtService,
+        public emailService: EmailService,
+        @InjectRepository(HistoricoTrocaSenha) public hitsRepository: Repository<HistoricoTrocaSenha>
     ) {
-        super(repository, jwtService);
+        super(repository, jwtService, emailService, hitsRepository, 'responsavel');
     }
 }

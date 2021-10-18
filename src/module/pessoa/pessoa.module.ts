@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { TurmaController } from './../../controller/turma/turma.controller';
 import { TurmaService } from './../../service/turma/turma.service';
 import { HomeController } from './../../controller/home/home.controller';
@@ -17,7 +18,7 @@ import { WhatsAppService } from 'src/service/whatsapp/whatsapp.service';
 import { Turma } from 'src/model/turma.model';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Aluno, Responsavel, Interno, Turma])],
+    imports: [TypeOrmModule.forFeature([Aluno, Responsavel, Interno, Turma]), SharedModule],
     providers: [AlunoService, ResponsavelService, InternoService, TurmaService, WhatsAppService],
     controllers: [AlunoController, ResponsavelController, InternoController, HomeController, TurmaController],
 })
