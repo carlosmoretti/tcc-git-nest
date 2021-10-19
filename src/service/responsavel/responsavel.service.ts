@@ -1,3 +1,4 @@
+import { HistoricotrocasenhaService } from 'src/service/historicotrocasenha/historicotrocasenha.service';
 import { ExcecaoGenerica } from './../../exceptions/excecaoGenerica.exception';
 import { Responsavel } from './../../model/responsavel.model';
 import { MensagensConst } from './../../mensagem.const';
@@ -16,6 +17,7 @@ export class ResponsavelService extends ServiceBase<Responsavel> {
         private whatsappService: WhatsAppService,
         @InjectRepository(Responsavel)
         public repository: Repository<Responsavel>,
+        public historicoSenhaService: HistoricotrocasenhaService
     ) {
         super(repository);
     }
@@ -34,7 +36,9 @@ export class ResponsavelService extends ServiceBase<Responsavel> {
         resp.senha = await bcrypt.hash(resp.senha, jwtConstants.bcrypt_salts);
         await this.whatsappService.enviar("+5521969416765", MensagensConst.confirmacaoCriacaoContaWhatsApp);
         resp.dataInclusao = new Date();
+
         super.create(resp);
+
     }
 
     async update(obj: Responsavel) {

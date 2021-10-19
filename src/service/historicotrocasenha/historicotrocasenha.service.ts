@@ -71,21 +71,22 @@ export class HistoricotrocasenhaService extends ServiceBase<HistoricoTrocaSenha>
         if(new Date() > itemTrocaSenhaBanco.validade)
             throw new ExcecaoGenerica('O prazo para a troca de senha expirou. Gere um novo token para prosseguir.', HttpStatus.BAD_REQUEST);
 
+        console.log(item.senha)
         const senhabcrypt = await bcrypt.hash(item.senha, jwtConstants.bcrypt_salts);
 
         switch(itemTrocaSenhaBanco.perfil) {
             case 'interno':
                 await this.internoRepository
-                    .createQueryBuilder('pess')
-                    .where('pess.email = :email', { email: itemTrocaSenhaBanco.email })
+                    .createQueryBuilder()
+                    .where('email = :email', { email: itemTrocaSenhaBanco.email })
                     .update()
                     .set({ senha: senhabcrypt })
                     .execute();
                     break;
             case 'responsavel':
                 await this.responsavelRepository
-                    .createQueryBuilder('pess')
-                    .where('pess.email = :email', { email: itemTrocaSenhaBanco.email })
+                    .createQueryBuilder()
+                    .where('email = :email', { email: itemTrocaSenhaBanco.email })
                     .update()
                     .set({ senha: senhabcrypt })
                     .execute();

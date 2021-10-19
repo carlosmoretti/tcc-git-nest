@@ -1,3 +1,4 @@
+import { HistoricoTrocaSenha } from 'src/model/historicotrocasenha.model';
 import { SharedModule } from './../shared/shared.module';
 import { TurmaController } from './../../controller/turma/turma.controller';
 import { TurmaService } from './../../service/turma/turma.service';
@@ -18,8 +19,8 @@ import { WhatsAppService } from 'src/service/whatsapp/whatsapp.service';
 import { Turma } from 'src/model/turma.model';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Aluno, Responsavel, Interno, Turma]), SharedModule],
+    imports: [TypeOrmModule.forFeature([Aluno, Responsavel, Interno, Turma, HistoricoTrocaSenha]), SharedModule],
     providers: [AlunoService, ResponsavelService, InternoService, TurmaService, WhatsAppService],
-    controllers: [AlunoController, ResponsavelController, InternoController, HomeController, TurmaController],
+    controllers: [AlunoController, ResponsavelController, InternoController, HomeController, TurmaController]
 })
 export class PessoaModule {}
