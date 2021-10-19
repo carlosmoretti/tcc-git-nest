@@ -29,6 +29,9 @@ export abstract class AuthService<T extends Pessoa> {
             .where('pess.login = :login', { login: username })
             .getOne();
 
+        if(usuario == null)
+            throw new ExcecaoGenerica('Não encontramos nenhum usuário com estas credenciais.', HttpStatus.BAD_REQUEST);
+
         const senhaBate = await this.comparePasswords(usuario.senha, password);
 
         if (!senhaBate)

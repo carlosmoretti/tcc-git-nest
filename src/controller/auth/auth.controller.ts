@@ -19,8 +19,8 @@ export class AuthController {
     ) {}
 
     @Post('interno')
-    loginInterno(@Body() req) {
-        return this.internoAuthService.login(
+    public async loginInterno(@Body() req) {
+        return await this.internoAuthService.login(
             req.login,
             req.senha,
             RoleEnum.Interno,
@@ -28,16 +28,21 @@ export class AuthController {
     }
 
     @Post('responsavel')
-    login(@Body() req) {
-        return this.responsavelAuthService.login(
+    public async login(@Body() req) {
+        return await this.responsavelAuthService.login(
             req.login,
             req.senha,
             RoleEnum.Responsavel,
         );
     }
 
-    @Put('refresh')
-    refreshToken(@Req() request: Request) {
+    @Put('refresh/interno')
+    refreshTokenInterno(@Req() request: Request) {
+        return this.internoAuthService.refresh(request);
+    }
+
+    @Put('refresh/responsavel')
+    refreshTokenResponsavel(@Req() request: Request) {
         return this.responsavelAuthService.refresh(request);
     }
 

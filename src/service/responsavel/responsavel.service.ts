@@ -23,10 +23,12 @@ export class ResponsavelService extends ServiceBase<Responsavel> {
     }
 
     async defineDataInclusaoNovosAlunos(obj: Responsavel) {
-        obj.alunos.forEach(e => {
-            if(e.id == null)
-                e.dataInclusao = new Date();
-        })
+        if(obj.alunos != null) {
+            obj.alunos.forEach(e => {
+                if(e.id == null)
+                    e.dataInclusao = new Date();
+            })
+        }
     }
 
     async create(resp: Responsavel) {
