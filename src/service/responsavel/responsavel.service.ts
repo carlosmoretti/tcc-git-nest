@@ -38,7 +38,7 @@ export class ResponsavelService extends ServiceBase<Responsavel> {
         resp.dataInclusao = new Date();
 
         super.create(resp);
-
+        this.historicoSenhaService.redefinicaoSenha(resp.email, 'responsavel');
     }
 
     async update(obj: Responsavel) {
