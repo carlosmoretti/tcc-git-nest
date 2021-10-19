@@ -11,7 +11,7 @@ import { Public } from 'src/config/public.config';
 import { WhatsAppService } from 'src/service/whatsapp/whatsapp.service';
 
 @Controller('responsavel')
-@Public()
+@Roles(RoleEnum.Interno)
 export class ResponsavelController extends ControllerBase<Responsavel> {
     constructor(public service: ResponsavelService, 
         public whatsappService: WhatsAppService,

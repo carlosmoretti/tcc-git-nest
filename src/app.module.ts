@@ -17,13 +17,12 @@ import { Interno } from './model/interno.model';
 import { Responsavel } from './model/responsavel.model';
 import { Aluno } from './model/aluno.model';
 /* eslint-disable prettier/prettier */
-import { ClassSerializerInterceptor, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { InternoController } from './controller/interno/interno.controller';
 import { InternoService } from './service/interno/interno.service';
-import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TurmaService } from './service/turma/turma.service';
 import { TurmaController } from './controller/turma/turma.controller';
 import { InternoAuthService } from './service/auth/interno.auth.service';

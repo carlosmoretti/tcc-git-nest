@@ -57,7 +57,7 @@ export abstract class AuthService<T extends Pessoa> {
         } catch (e) {
             throw new ExcecaoGenerica(
                 'Sua sessão foi expirada. Você precisa autenticar-se novamente na aplicação',
-                HttpStatus.FORBIDDEN,
+                HttpStatus.UNAUTHORIZED,
             );
         }
 
