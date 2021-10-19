@@ -59,7 +59,10 @@ export class AuthController {
 
     @Post('trocasenha/:id/confirmar')
     async confirmaTrocaSenha(@Param('id') id: number, @Body() item: any) {
-        console.log(item.senha);
-        await this.historicoTrocaSenhaService.defineSenha(id, item);
+        const modulo = await this.historicoTrocaSenhaService.defineSenha(id, item);
+
+        return {
+            modulo
+        }
     }
 }

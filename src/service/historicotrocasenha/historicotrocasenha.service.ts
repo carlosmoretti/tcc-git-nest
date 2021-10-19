@@ -92,5 +92,7 @@ export class HistoricotrocasenhaService extends ServiceBase<HistoricoTrocaSenha>
                     .execute();
                     break;
         }
+
+        return itemTrocaSenhaBanco.perfil;
     }
 }
