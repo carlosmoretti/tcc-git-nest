@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
+import { IS_PUBLIC_KEY } from './../config/public.config';
 import { TokenInvalidoException } from './../exceptions/tokenInvalido.exception';
 import { ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
-import { IS_PUBLIC_KEY } from '../module/auth/auth.module';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {

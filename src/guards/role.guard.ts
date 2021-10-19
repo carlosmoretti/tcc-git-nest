@@ -1,11 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { ExcecaoGenerica } from './../exceptions/excecaoGenerica.exception';
 import { Logger, CanActivate, Injectable, HttpStatus } from '@nestjs/common';
-import { IS_PUBLIC_KEY } from '../module/auth/auth.module';
 import { Reflector } from '@nestjs/core';
 import { ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { RoleEnum } from '../model/enums/roles.enum';
+import { IS_PUBLIC_KEY } from 'src/config/public.config';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
