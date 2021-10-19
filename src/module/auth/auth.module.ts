@@ -12,10 +12,11 @@ import { JwtStrategy } from './../../strategy/jwt.strategy';
 import { jwtConstants } from './../../constants';
 import { AuthController } from './../../controller/auth/auth.controller';
 import { PessoaModule } from '../pessoa/pessoa.module';
-import { Module } from '@nestjs/common';
+import { Module, Controller } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Aluno } from '../../model/aluno.model';
 import { JwtModule } from '@nestjs/jwt';
+import { HistoricotrocasenhaService } from 'src/service/historicotrocasenha/historicotrocasenha.service';
 
 export const IS_PUBLIC_KEY = 'isPublic';
 
@@ -32,6 +33,7 @@ export const IS_PUBLIC_KEY = 'isPublic';
     providers: [
         ResponsavelAuthService,
         InternoAuthService,
+        HistoricotrocasenhaService,
         JwtStrategy,
         { provide: 'APP_GUARD', useClass: JwtAuthGuard },
         { provide: 'APP_GUARD', useClass: RolesGuard },

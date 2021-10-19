@@ -18,4 +18,7 @@ export abstract class Pessoa extends BaseEntity {
 
     @Column({ name: 'pess_dt_inclusao'})
     dataInclusao: Date;
+
+    @Column({ name: 'pess_tx_email'})
+    email: string;
 }

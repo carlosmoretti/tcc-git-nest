@@ -39,7 +39,7 @@ export class ResponsavelService extends ServiceBase<Responsavel> {
 
     async update(obj: Responsavel) {
         await this.defineDataInclusaoNovosAlunos(obj);
-        obj.senha = await bcrypt.hash(obj.senha, jwtConstants.bcrypt_salts);
+        // obj.senha = await bcrypt.hash(obj.senha, jwtConstants.bcrypt_salts);
         super.update(obj);
     }
 
