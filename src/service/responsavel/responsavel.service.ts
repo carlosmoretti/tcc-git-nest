@@ -1,3 +1,4 @@
+import { AlunoService } from './../aluno/aluno.service';
 import { HistoricotrocasenhaService } from 'src/service/historicotrocasenha/historicotrocasenha.service';
 import { ExcecaoGenerica } from './../../exceptions/excecaoGenerica.exception';
 import { Responsavel } from './../../model/responsavel.model';
@@ -17,7 +18,8 @@ export class ResponsavelService extends ServiceBase<Responsavel> {
         private whatsappService: WhatsAppService,
         @InjectRepository(Responsavel)
         public repository: Repository<Responsavel>,
-        public historicoSenhaService: HistoricotrocasenhaService
+        public historicoSenhaService: HistoricotrocasenhaService,
+        public alunoService: AlunoService
     ) {
         super(repository);
     }

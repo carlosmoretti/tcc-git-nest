@@ -43,6 +43,10 @@ export abstract class AuthService<T extends Pessoa> {
         return usuario;
     }
 
+    public getByToken(token: string) : any {
+        return this.jwtService.decode(token);
+    }
+
     private async comparePasswords(senhaBanco, senhaAutenticacao) {
         const resultado = await bcrypt.compare(senhaAutenticacao, senhaBanco);
         return resultado;

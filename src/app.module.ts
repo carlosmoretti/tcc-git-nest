@@ -1,3 +1,7 @@
+import { AgendaController } from './controller/agenda/agenda.controller';
+import { Agenda } from './model/agenda.model';
+import { Registro } from './model/registro.model';
+import { Configuracao } from './model/configuracao.model';
 import { EmailService } from './service/email/email.service';
 import { HomeController } from './controller/home/home.controller';
 import { ResponsavelController } from './controller/responsavel/responsavel.controller';
@@ -28,12 +32,16 @@ import { TurmaController } from './controller/turma/turma.controller';
 import { InternoAuthService } from './service/auth/interno.auth.service';
 import { Turma } from './model/turma.model';
 import { WhatsAppService } from './service/whatsapp/whatsapp.service';
+import { ConfiguracaoService } from './service/configuracao/configuracao.service';
+import { ConfiguracaoController } from './controller/configuracao/configuracao.controller';
+import { AgendaService } from './service/agenda/agenda.service';
+import { ConsultaResponsavelController } from './controller/consulta-responsavel/consulta-responsavel.controller';
 
 export const IS_PUBLIC_KEY = 'isPublic';
 
 @Module({
     imports: [TypeOrmModule.forRoot(),
-        TypeOrmModule.forFeature([Aluno, Responsavel, Interno, Turma, HistoricoTrocaSenha]),
+        TypeOrmModule.forFeature([Aluno, Responsavel, Interno, Turma, HistoricoTrocaSenha, Configuracao, Agenda, Registro]),
         JwtModule.register({
             secret: jwtConstants.secret,
             signOptions: { expiresIn: '1h' },
@@ -46,7 +54,10 @@ export const IS_PUBLIC_KEY = 'isPublic';
         ResponsavelController,
         InternoController,
         HomeController,
-        TurmaController
+        TurmaController,
+        ConfiguracaoController,
+        AgendaController,
+        ConsultaResponsavelController
     ],
     providers: [
         AppService,
@@ -62,6 +73,8 @@ export const IS_PUBLIC_KEY = 'isPublic';
         HistoricotrocasenhaService,
         { provide: 'APP_GUARD', useClass: JwtAuthGuard },
         { provide: 'APP_GUARD', useClass: RolesGuard },
+        ConfiguracaoService,
+        AgendaService,
     ],
 })
 export class AppModule {}

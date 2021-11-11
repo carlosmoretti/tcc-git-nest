@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Aluno } from '../../model/aluno.model';
@@ -20,5 +21,13 @@ export class AlunoService extends ServiceBase<Aluno> {
             .createQueryBuilder('mat')
             .where('mat.matricula = :matricula', { matricula })
             .getOne();
+    }
+
+    async getByMatriculaResponsavel(matricula: string) {
+        return await this.repository
+            .createQueryBuilder('alun')
+            .innerJoinAndSelect('alun.responsavel', 'resp')
+            .where('resp.matricula = :matricula', { matricula })
+            .getMany();
     }
 }
