@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PaginateItemColumnDto } from 'src/dto/paginate.item.column';
 import { Configuracao } from 'src/model/configuracao.model';
 import { Repository } from 'typeorm';
 import { ServiceBase } from '../service';
@@ -9,6 +10,10 @@ import { ServiceBase } from '../service';
 export class ConfiguracaoService extends ServiceBase<Configuracao> {
     constructor(@InjectRepository(Configuracao) public repository: Repository<Configuracao>) {
         super(repository);
+    }
+
+    public objectToDtoPaginate(values: Configuracao[]): PaginateItemColumnDto {
+        throw new Error('Method not implemented.');
     }
 
     public async getByNome(nome: string) {

@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { Body, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { PaginateItemColumnDto } from './../dto/paginate.item.column';
+import { Body, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ServiceBase } from '../service/service';
 
 export default abstract class ControllerBase<T> {
@@ -8,6 +9,13 @@ export default abstract class ControllerBase<T> {
     @Get()
     public async getAll(): Promise<T[]> {
         return await this.service.getAll();
+    }
+
+    @Get('/paginate')
+    async paginate(@Query('itensPerPage') itensPerPage: number, 
+        @Query('page') page: number,
+        @Query('keyword') keyword: string) {
+        return await this.service.paginate(itensPerPage, page, keyword);
     }
 
     @Get(':id')

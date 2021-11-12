@@ -11,7 +11,8 @@ import { Public } from 'src/config/public.config';
 import { WhatsAppService } from 'src/service/whatsapp/whatsapp.service';
 
 @Controller('responsavel')
-@Roles(RoleEnum.Interno)
+@Public()
+// @Roles(RoleEnum.Interno)
 export class ResponsavelController extends ControllerBase<Responsavel> {
     constructor(public service: ResponsavelService, 
         public whatsappService: WhatsAppService,
@@ -25,9 +26,8 @@ export class ResponsavelController extends ControllerBase<Responsavel> {
         this.emailService.enviar('Teste', '<h1>Teste</h1>', 'carlosmoretti2019@gmail.com');
     }
 
-    // @Get(':id/alunos')
-    // public async getAlunos(@Param('id') responsavelId) {
-    //     const item = await this.service.get(responsavelId);
-    //     return item.alunos;
-    // }
+    @Get(':id/alunos')
+    public async getAlunos(@Param('id') responsavelId) {
+        return await this.alunoService.alunosPorResponsavel(responsavelId);
+    }
 }

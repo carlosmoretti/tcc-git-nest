@@ -20,12 +20,6 @@ export class ConsultaResponsavelController {
     async agendaPorMatriculaAluno(@Param('matriculaAluno') matriculaAluno: string,
         @Query('dataInicio') dataInicio: string,
         @Query('dataFim') dataFim: string) {
-        
-        const dataInicioDate = new Date(dataInicio);
-        const dataFimDate = new Date(dataFim);
-
-        console.log(dataInicio, dataFim);
-
-        return await this.agendaService.agendaPorMatriculaData(matriculaAluno, dataInicioDate, dataFimDate);
+        return await this.agendaService.agendaPorMatriculaData(matriculaAluno, dataInicio, dataFim);
     }
 }

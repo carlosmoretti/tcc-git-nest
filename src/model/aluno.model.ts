@@ -16,7 +16,7 @@ export class Aluno {
     @Column({ name: 'alun_tx_matricula' })
     matricula: string;
 
-    @ManyToMany(() => Responsavel, (resp) => resp.alunos)
+    @ManyToMany(() => Responsavel, (resp) => resp.alunos, { eager: true })
     responsavel: Responsavel[];
 
     @Transform(({ value }) => DateHelper.parseDate(value, 'YYYY-MM-DD'))

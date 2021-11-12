@@ -7,6 +7,5 @@
     "database": "tccescola2",
     "entities": [
         "dist/**/*.model{.ts,.js}"
-    ],
-    "synchronize": true
+    ]
 }

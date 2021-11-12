@@ -11,6 +11,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { HistoricoTrocaSenha } from 'src/model/historicotrocasenha.model';
 import { ServiceBase } from '../service';
 import * as bcrypt from 'bcrypt';
+import { PaginateItemColumnDto } from 'src/dto/paginate.item.column';
 
 @Injectable()
 export class HistoricotrocasenhaService extends ServiceBase<HistoricoTrocaSenha> {
@@ -19,6 +20,10 @@ export class HistoricotrocasenhaService extends ServiceBase<HistoricoTrocaSenha>
         @InjectRepository(Responsavel) public responsavelRepository: Repository<Responsavel>,
         public emailService: EmailService) {
         super(repository);
+    }
+
+    public objectToDtoPaginate(values: HistoricoTrocaSenha[]): PaginateItemColumnDto {
+        throw new Error('Method not implemented.');
     }
 
     public async invalidaTokensExistentes(email, modulo) {

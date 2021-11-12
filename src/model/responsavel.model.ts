@@ -17,7 +17,7 @@ export class Responsavel extends Pessoa {
     @Column({name: "resp_tx_telefone"})
     telefone: string;
 
-    @ManyToMany(() => Aluno, (user) => user.responsavel, { eager: true, cascade: true })
+    @ManyToMany(() => Aluno, (user) => user.responsavel, { cascade: true})
     @JoinTable({
         name: "responsavel_aluno",
         joinColumn: { name: "resp_cd_id" },

@@ -9,6 +9,7 @@ import { ServiceBase } from '../service';
 import { Interno } from 'src/model/interno.model';
 import { Registro } from 'src/model/registro.model';
 import { Aluno } from 'src/model/aluno.model';
+import { PaginateItemColumnDto } from 'src/dto/paginate.item.column';
 
 @Injectable()
 export class AgendaService extends ServiceBase<any> {
@@ -16,6 +17,10 @@ export class AgendaService extends ServiceBase<any> {
         @InjectRepository(Turma) public turmaRepository: Repository<Turma>,
         @InjectRepository(Registro) public registroRepository: Repository<Registro>) {
         super(repository);
+    }
+
+    public objectToDtoPaginate(values: any[]): PaginateItemColumnDto {
+        throw new Error('Method not implemented.');
     }
 
     private criaRegistro(dto: InclusaoAgendaDto) {
@@ -67,14 +72,14 @@ export class AgendaService extends ServiceBase<any> {
         await this.registroRepository.save(registro);
     }
 
-    public async agendaPorMatriculaData(matricula: string, dataInicio: Date, dataFim: Date) {
+    public async agendaPorMatriculaData(matricula: string, dataInicio: string, dataFim: string) {
         return await this.repository.createQueryBuilder('agenda')
             .innerJoinAndSelect('agenda.turma', 'turma')
             .innerJoinAndSelect('agenda.professor', 'professor')
             .innerJoinAndSelect('agenda.registros', 'registro')
             .innerJoinAndSelect('registro.aluno', 'aluno')
             .where('aluno.matricula = :matricula', { matricula })
-            .andWhere('agenda.dataEscrita >= :dataInicio', { dataInicio})
+            .andWhere('agenda.dataEscrita >= :dataInicio', { dataInicio })
             .andWhere('agenda.dataEscrita <= :dataFim', { dataFim })
             .getMany();
             //  .printSql()
