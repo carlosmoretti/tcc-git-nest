@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { PrimaryGeneratedColumn } from 'typeorm';
+import { Nivel } from './nivel.model';
+import { JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Entity, Column } from 'typeorm';
 import { Pessoa } from './pessoa.model';
 
@@ -11,4 +12,8 @@ export class Interno extends Pessoa {
 
     @Column({ name: 'inte_tx_matricula' })
     matricula: string;
+
+    @ManyToOne(type => Nivel, nivel => nivel.id, { eager: true})
+    @JoinColumn({ name: 'nive_cd_id'})
+    nivel: Nivel;
 }

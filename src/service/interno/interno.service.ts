@@ -1,3 +1,4 @@
+import { Nivel } from './../../model/nivel.model';
 /* eslint-disable prettier/prettier */
 import { jwtConstants } from './../../constants';
 import { HistoricotrocasenhaService } from 'src/service/historicotrocasenha/historicotrocasenha.service';
@@ -15,15 +16,16 @@ export class InternoService extends ServiceBase<Interno> {
     public objectToDtoPaginate(values: Interno[]): PaginateItemColumnDto {
         const valores = [];
         for(const value of values) {
-            const valor = [value.id, value.nome, value.sobrenome, value.email, value.matricula];
+            const valor = [value.id, value.nome, value.sobrenome, value.email, value.matricula, value.nivel.nome];
             valores.push(valor);
         }
 
-        return new PaginateItemColumnDto(['ID', 'Nome', 'Sobrenome', 'Email', 'Matricula'], valores);
+        return new PaginateItemColumnDto(['ID', 'Nome', 'Sobrenome', 'Email', 'Matricula', 'Nível'], valores);
     }
 
     constructor(@InjectRepository(Interno) public repository: Repository<Interno>,
-        public historicoSenhaService: HistoricotrocasenhaService) {
+        public historicoSenhaService: HistoricotrocasenhaService,
+        @InjectRepository(Nivel) public nivelRepository: Repository<Nivel>) {
         super(repository);
     }
 
@@ -33,5 +35,9 @@ export class InternoService extends ServiceBase<Interno> {
 
         super.create(obj);
         this.historicoSenhaService.redefinicaoSenha(obj.email, 'interno');
+    }
+
+    async niveis() {
+        return this.nivelRepository.find();
     }
 }

@@ -1,3 +1,4 @@
+import { InternoService } from './../interno/interno.service';
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { HistoricoTrocaSenha } from './../../model/historicotrocasenha.model';
@@ -26,6 +27,7 @@ export abstract class AuthService<T extends Pessoa> {
     public async validate(username: string, password: string) {
         const usuario = await this.service
             .createQueryBuilder('pess')
+            .innerJoinAndSelect('pess.nivel', 'nivel')
             .where('pess.login = :login', { login: username })
             .getOne();
 
@@ -78,6 +80,7 @@ export abstract class AuthService<T extends Pessoa> {
             username: usuario.login,
             id: usuario.id,
             role: tipoUsuario.toString(),
+            nivel: usuario.nivel.id
         };
 
         return payload;

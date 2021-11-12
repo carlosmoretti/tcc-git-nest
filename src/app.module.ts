@@ -1,3 +1,4 @@
+import { Nivel } from './model/nivel.model';
 import { AgendaController } from './controller/agenda/agenda.controller';
 import { Agenda } from './model/agenda.model';
 import { Registro } from './model/registro.model';
@@ -41,7 +42,7 @@ export const IS_PUBLIC_KEY = 'isPublic';
 
 @Module({
     imports: [TypeOrmModule.forRoot(),
-        TypeOrmModule.forFeature([Aluno, Responsavel, Interno, Turma, HistoricoTrocaSenha, Configuracao, Agenda, Registro]),
+        TypeOrmModule.forFeature([Aluno, Responsavel, Interno, Turma, HistoricoTrocaSenha, Configuracao, Agenda, Registro, Nivel]),
         JwtModule.register({
             secret: jwtConstants.secret,
             signOptions: { expiresIn: '1h' },
