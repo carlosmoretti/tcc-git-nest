@@ -23,7 +23,7 @@ export class ResponsavelController extends ControllerBase<Responsavel> {
 
     @Post('email')
     teste() {
-        this.emailService.enviar('Teste', '<h1>Teste</h1>', 'carlosmoretti2019@gmail.com');
+        // this.emailService.enviar('Teste', '<h1>Teste</h1>', 'carlosmoretti2019@gmail.com');
     }
 
     @Get(':id/alunos')

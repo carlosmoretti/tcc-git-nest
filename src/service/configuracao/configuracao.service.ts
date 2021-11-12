@@ -13,7 +13,13 @@ export class ConfiguracaoService extends ServiceBase<Configuracao> {
     }
 
     public objectToDtoPaginate(values: Configuracao[]): PaginateItemColumnDto {
-        throw new Error('Method not implemented.');
+        const valores = [];
+        values.forEach(x => {
+            const res = [x.id, x.nome];
+            valores.push(res);
+        })
+
+        return new PaginateItemColumnDto(['ID', 'Tag'], valores);
     }
 
     public async getByNome(nome: string) {

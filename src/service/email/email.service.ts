@@ -13,6 +13,10 @@ export class EmailService  {
     }
 
     enviar(titulo: string, corpoHtml: string, destino: string) {
+        return this.enviarMultiploRecipiente(titulo, corpoHtml, [destino]);
+    }
+
+    enviarMultiploRecipiente(titulo: string, corpoHtml: string, destino: string[]) {
         const sgMail = this.init();
 
         const message = {
