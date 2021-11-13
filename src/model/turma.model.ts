@@ -14,6 +14,9 @@ export class Turma {
     @Column({ name: 'turm_tx_matricula' })
     matricula: string;
 
+    @Column({ name: 'turm_tx_nome'})
+    nome: string;
+
     @ManyToOne(() => Interno, interno => interno.id, { eager: true })
     @JoinColumn({ name: 'inte_cd_id'})
     professorResponsavel: Interno;

@@ -15,11 +15,11 @@ export class TurmaService extends ServiceBase<Turma> {
     public objectToDtoPaginate(values: Turma[]): PaginateItemColumnDto {
         const valores = [];
         values.forEach(value => {
-            const res = [value.id, value.matricula, value.professorResponsavel.nome];
+            const res = [value.id, value.matricula, value.nome, value.professorResponsavel.nome];
             valores.push(res);
         });
 
-        return new PaginateItemColumnDto(['ID', 'Turma', 'Professor'], valores);
+        return new PaginateItemColumnDto(['ID', 'Turma', 'Título', 'Professor'], valores);
     }
 
     constructor(@InjectRepository(Turma) public repository: Repository<Turma>) {

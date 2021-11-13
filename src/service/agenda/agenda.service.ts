@@ -47,7 +47,8 @@ export class AgendaService extends ServiceBase<any> {
             .map(e => e.responsavel.map(x => x.email));
 
         const emails = [].concat.apply([], responsaveis);
-        
+
+        console.log(emails);
         const tituloEmail = await (await this.configuracaoService.getByNome('titulo_envio_email_agenda')).valor;
         const conteudoEmail = await (await this.configuracaoService.getByNome('conteudo_envio_email_agenda')).valor;
         await this.emailService.enviarMultiploRecipiente(tituloEmail, conteudoEmail, emails);
@@ -69,7 +70,6 @@ export class AgendaService extends ServiceBase<any> {
             agenda.registros.push(this.criaRegistro(e));
         })
 
-        console.log(agenda);
         await this.repository.save(agenda)
         await this.enviaEmailResponsavelAlunos(dto.map(e => e.id));
     }

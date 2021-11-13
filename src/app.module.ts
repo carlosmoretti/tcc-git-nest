@@ -1,3 +1,4 @@
+import { Recado } from './model/recado.model';
 import { Nivel } from './model/nivel.model';
 import { AgendaController } from './controller/agenda/agenda.controller';
 import { Agenda } from './model/agenda.model';
@@ -37,12 +38,14 @@ import { ConfiguracaoService } from './service/configuracao/configuracao.service
 import { ConfiguracaoController } from './controller/configuracao/configuracao.controller';
 import { AgendaService } from './service/agenda/agenda.service';
 import { ConsultaResponsavelController } from './controller/consulta-responsavel/consulta-responsavel.controller';
+import { RecadoService } from './service/recado/recado.service';
+import { RecadoController } from './controller/recado/recado.controller';
 
 export const IS_PUBLIC_KEY = 'isPublic';
 
 @Module({
     imports: [TypeOrmModule.forRoot(),
-        TypeOrmModule.forFeature([Aluno, Responsavel, Interno, Turma, HistoricoTrocaSenha, Configuracao, Agenda, Registro, Nivel]),
+        TypeOrmModule.forFeature([Aluno, Responsavel, Interno, Turma, HistoricoTrocaSenha, Configuracao, Agenda, Registro, Nivel, Recado]),
         JwtModule.register({
             secret: jwtConstants.secret,
             signOptions: { expiresIn: '1h' },
@@ -58,7 +61,8 @@ export const IS_PUBLIC_KEY = 'isPublic';
         TurmaController,
         ConfiguracaoController,
         AgendaController,
-        ConsultaResponsavelController
+        ConsultaResponsavelController,
+        RecadoController
     ],
     providers: [
         AppService,
@@ -76,6 +80,7 @@ export const IS_PUBLIC_KEY = 'isPublic';
         { provide: 'APP_GUARD', useClass: RolesGuard },
         ConfiguracaoService,
         AgendaService,
+        RecadoService,
     ],
 })
 export class AppModule {}

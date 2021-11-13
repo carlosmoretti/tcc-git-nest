@@ -30,4 +30,9 @@ export class ResponsavelController extends ControllerBase<Responsavel> {
     public async getAlunos(@Param('id') responsavelId) {
         return await this.alunoService.alunosPorResponsavel(responsavelId);
     }
+
+    @Get('/matricula/:id')
+    public async getByMatricula(@Param('id') matricula: string) {
+        return await this.service.getByMatricula(matricula);
+    }
 }

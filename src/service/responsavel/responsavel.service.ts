@@ -73,4 +73,10 @@ export class ResponsavelService extends ServiceBase<Responsavel> {
         if(item != null)
             throw new ExcecaoGenerica('Já existe um usuário cadastrado com essa matricula.', HttpStatus.BAD_REQUEST);
     }
+
+    async getByMatricula(matricula) {
+        return await this.repository.createQueryBuilder('resp')
+            .where('resp.matricula = :matricula', { matricula })
+            .getOne();
+    }
 }

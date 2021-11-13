@@ -23,7 +23,8 @@ export class EmailService  {
             to: destino,
             from: ORIGEM_EMAIL_API,
             subject: titulo,
-            html: corpoHtml
+            html: corpoHtml,
+            isMultiple: true
         };
 
         sgMail.send(message)
