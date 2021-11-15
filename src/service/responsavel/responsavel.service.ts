@@ -49,13 +49,12 @@ export class ResponsavelService extends ServiceBase<Responsavel> {
     async create(resp: Responsavel) {
         await this.defineDataInclusaoNovosAlunos(resp);
         await this.verificaMatriculaDisponivel(resp.matricula);
+        
         resp.senha = jwtConstants.senhaPendente;
         resp.senha = await bcrypt.hash(resp.senha, jwtConstants.bcrypt_salts);
-        await this.whatsappService.enviar("+5521969416765", MensagensConst.confirmacaoCriacaoContaWhatsApp);
         resp.dataInclusao = new Date();
 
-        super.create(resp);
-        this.historicoSenhaService.redefinicaoSenha(resp.email, 'responsavel');
+        await super.create(resp);
     }
 
     async update(obj: Responsavel) {
