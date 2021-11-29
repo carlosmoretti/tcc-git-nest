@@ -1,4 +1,4 @@
-import { Body, Param, Put } from '@nestjs/common';
+import { Body, Get, Param, Put } from '@nestjs/common';
 /* eslint-disable prettier/prettier */
 import { RecadoService } from './../../service/recado/recado.service';
 import { Controller, Post } from '@nestjs/common';
@@ -27,5 +27,10 @@ export class RecadoController extends ControllerBase<Recado> {
         param.data = new Date();
         
         return await this.service.create(param);
+    }
+
+    @Get('/pendentes')
+    async pendentes() {
+        return await this.recadoService.pendentes();
     }
 }

@@ -41,6 +41,7 @@ import { ConsultaResponsavelController } from './controller/consulta-responsavel
 import { RecadoService } from './service/recado/recado.service';
 import { RecadoController } from './controller/recado/recado.controller';
 import { RegistroService } from './service/registro/registro.service';
+import { DashboardService } from './service/dashboard/dashboard.service';
 
 export const IS_PUBLIC_KEY = 'isPublic';
 
@@ -83,6 +84,7 @@ export const IS_PUBLIC_KEY = 'isPublic';
         AgendaService,
         RecadoService,
         RegistroService,
+        DashboardService,
     ],
 })
 export class AppModule {}

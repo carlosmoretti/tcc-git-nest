@@ -58,4 +58,8 @@ export class RecadoService extends ServiceBase<Recado> {
         const destino = await this.configuracaoService.getByNome('email_coordenacao');
         await this.emailService.enviar(`Novo recado de ${obj.responsavel.nome}`, `Para o aluno: ${obj.aluno.nome} <br/> ${obj.mensagem}`, destino.valor);
     }
+
+    public async pendentes() : Promise<any> {
+        return await this.service.find({ where: {visualizado: false }});
+    }
 }

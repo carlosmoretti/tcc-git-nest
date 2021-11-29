@@ -1,3 +1,4 @@
+import { TurmaService } from './../../service/turma/turma.service';
 import { RegistroService } from './../../service/registro/registro.service';
 import { AgendaService } from './../../service/agenda/agenda.service';
 /* eslint-disable prettier/prettier */
@@ -20,7 +21,8 @@ export class InternoController extends ControllerBase<Interno> {
         public alunoService: AlunoService,
         public responsavelService: ResponsavelService,
         public recadoService: RecadoService,
-        public registroService: RegistroService) {
+        public registroService: RegistroService,
+        public turmaService: TurmaService) {
         super(service);
     }
 
@@ -42,5 +44,23 @@ export class InternoController extends ControllerBase<Interno> {
             { valor: totalAlunos, descricao: 'Alunos cadastrados'},
             { valor: totalAgendas, descricao: 'Agendas preenchidas'}
         ]
+    }
+
+    @Get('/dashboard/aluno-turma')
+    async dashboardAlunoTurma() {
+        const turmas = await this.turmaService.getAll();
+        const dashboard = {
+            turmas: [],
+            total: [],
+            resultado: 0
+        };
+
+        turmas.forEach(e => {
+            dashboard.turmas.push(e.nome);
+            dashboard.total.push(e.alunos.length);
+            dashboard.resultado = dashboard.total.reduce((a,b) => a + b, 0);
+        })
+
+        return dashboard;
     }
 }
