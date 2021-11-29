@@ -2,7 +2,6 @@ import { InternoService } from './../interno/interno.service';
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { HistoricoTrocaSenha } from './../../model/historicotrocasenha.model';
-import { TROCA_SENHA_URL } from './../../config/sendgrid.config';
 import { EmailService } from './../email/email.service';
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable prettier/prettier */

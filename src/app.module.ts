@@ -40,6 +40,7 @@ import { AgendaService } from './service/agenda/agenda.service';
 import { ConsultaResponsavelController } from './controller/consulta-responsavel/consulta-responsavel.controller';
 import { RecadoService } from './service/recado/recado.service';
 import { RecadoController } from './controller/recado/recado.controller';
+import { RegistroService } from './service/registro/registro.service';
 
 export const IS_PUBLIC_KEY = 'isPublic';
 
@@ -81,6 +82,7 @@ export const IS_PUBLIC_KEY = 'isPublic';
         ConfiguracaoService,
         AgendaService,
         RecadoService,
+        RegistroService,
     ],
 })
 export class AppModule {}

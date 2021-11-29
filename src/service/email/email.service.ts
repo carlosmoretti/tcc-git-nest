@@ -1,33 +1,38 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { SENDGRID_API, ORIGEM_EMAIL_API } from './../../config/sendgrid.config';
+import { ConfiguracaoService } from './../configuracao/configuracao.service';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class EmailService  {
 
-    init() {
+    constructor(public configuracaoService: ConfiguracaoService) {
+    }
+
+    async init() {
+        const sendgridConfig = await this.configuracaoService.getByNome('sendgrid_api');
         const sgMail = require('@sendgrid/mail');
-        sgMail.setApiKey(SENDGRID_API);
+        sgMail.setApiKey(sendgridConfig.valor);
         return sgMail;
     }
 
-    enviar(titulo: string, corpoHtml: string, destino: string) {
+    async enviar(titulo: string, corpoHtml: string, destino: string) {
         return this.enviarMultiploRecipiente(titulo, corpoHtml, [destino]);
     }
 
-    enviarMultiploRecipiente(titulo: string, corpoHtml: string, destino: string[]) {
-        const sgMail = this.init();
+    async enviarMultiploRecipiente(titulo: string, corpoHtml: string, destino: string[]) {
+        const sgMail = await this.init();
+        const origemEmail = await this.configuracaoService.getByNome('email_aplicacao');
 
         const message = {
             to: destino,
-            from: ORIGEM_EMAIL_API,
+            from: origemEmail.valor,
             subject: titulo,
             html: corpoHtml,
             isMultiple: true
         };
 
-        sgMail.send(message)
+        await sgMail.send(message)
             .then(() => {
                 console.log("enviado");
             }).catch((error) => {

@@ -1,3 +1,5 @@
+import { ConfiguracaoService } from './../configuracao/configuracao.service';
+import { EmailService } from './../email/email.service';
 import { PaginateDto } from './../../dto/paginate.dto';
 import { Repository } from 'typeorm/repository/Repository';
 /* eslint-disable prettier/prettier */
@@ -24,7 +26,9 @@ export class RecadoService extends ServiceBase<Recado> {
         return new PaginateItemColumnDto(['ID', 'Nome', 'Responsável', 'Visualizado', 'Data'], res);
     }
 
-    constructor(@InjectRepository(Recado) repository: Repository<Recado>) {
+    constructor(@InjectRepository(Recado) repository: Repository<Recado>, 
+        public emailService: EmailService,
+        public configuracaoService: ConfiguracaoService) {
         super(repository);
     }
 
@@ -47,5 +51,11 @@ export class RecadoService extends ServiceBase<Recado> {
         const item = await this.get(id);
         item.visualizado = true;
         return await this.update(item);
+    }
+
+    async create(obj: Recado): Promise<void> {
+        await this.service.save(obj);
+        const destino = await this.configuracaoService.getByNome('email_coordenacao');
+        await this.emailService.enviar(`Novo recado de ${obj.responsavel.nome}`, `Para o aluno: ${obj.aluno.nome} <br/> ${obj.mensagem}`, destino.valor);
     }
 }

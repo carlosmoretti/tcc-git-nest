@@ -1,10 +1,10 @@
+/* eslint-disable prettier/prettier */
+import { ConfiguracaoService } from './../configuracao/configuracao.service';
 import { ExcecaoGenerica } from './../../exceptions/excecaoGenerica.exception';
 import { jwtConstants } from './../../constants';
 import { Responsavel } from './../../model/responsavel.model';
-/* eslint-disable prettier/prettier */
 import { Interno } from './../../model/interno.model';
 import { EmailService } from './../email/email.service';
-import { TROCA_SENHA_URL } from './../../config/sendgrid.config';
 import { Repository } from 'typeorm';
 import { Injectable, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -18,7 +18,8 @@ export class HistoricotrocasenhaService extends ServiceBase<HistoricoTrocaSenha>
     constructor(@InjectRepository(HistoricoTrocaSenha) public repository: Repository<HistoricoTrocaSenha>, 
         @InjectRepository(Interno) public internoRepository: Repository<Interno>,
         @InjectRepository(Responsavel) public responsavelRepository: Repository<Responsavel>,
-        public emailService: EmailService) {
+        public emailService: EmailService,
+        public configuracaoService: ConfiguracaoService) {
         super(repository);
     }
 
@@ -37,7 +38,8 @@ export class HistoricotrocasenhaService extends ServiceBase<HistoricoTrocaSenha>
     public async redefinicaoSenha(email, modulo) {
         const token = Math.floor(100000 + Math.random() * 900000);
         const titulo = "DEFINIÇÃO DE SENHA SGBE | " + token;
-        const linkTrocaSenha = TROCA_SENHA_URL;
+        
+        const linkTrocaSenha = await this.configuracaoService.getByNome('url_troca_senha');
 
         const curdate = new Date();
         curdate.setMinutes(curdate.getMinutes() + 30);
@@ -57,7 +59,7 @@ export class HistoricotrocasenhaService extends ServiceBase<HistoricoTrocaSenha>
             <br /> Caso não consiga, cole o seguinte link do no seu navegador: ${linkTrocaSenha}/${resultado.id}
             <br /> O token para a operação é <b>${token}</b> e é válido por 30 minutos.`;
 
-        this.emailService.enviar(titulo, mensagem, email);
+        await this.emailService.enviar(titulo, mensagem, email);
     }
 
     public async defineSenha(id, item: any) {

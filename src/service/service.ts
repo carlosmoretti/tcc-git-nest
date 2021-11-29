@@ -27,6 +27,10 @@ export abstract class ServiceBase<T> {
         await this.service.delete(obj);
     }
 
+    async count() : Promise<number> {
+        return this.service.count();
+    }
+
     async removeAll(obj: number[]): Promise<void> {
         await this.service.delete(obj);
     }
