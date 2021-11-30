@@ -19,9 +19,12 @@ export class Registro {
     @Column({ name: 'regi_tx_conteudo', type: 'mediumtext'})
     conteudo: string;
 
-    @Column({ name: 'regi_in_visualizado' })
+    @Column({ name: 'regi_in_visualizado', default: false })
     visualizado: boolean;
 
     @Column({ name: 'regi_dt_visualizacao', nullable: true })
     dataVisualizacao: Date;
+
+    @Column({ name: 'regi_in_aluno_presente', default: false })
+    alunoPresente: boolean;
 }

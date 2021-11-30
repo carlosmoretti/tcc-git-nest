@@ -21,6 +21,6 @@ export class Agenda {
     @Column({ name: 'agen_dt_inclusao'})
     dataEscrita: Date;
 
-    @OneToMany(() => Registro, registro => registro.agenda, { cascade: true, eager: false })
+    @OneToMany(() => Registro, registro => registro.agenda, { cascade: true, eager: true })
     registros: Registro[];
 }

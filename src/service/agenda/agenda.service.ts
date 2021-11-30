@@ -1,3 +1,4 @@
+import { startOfDay, endOfDay } from 'date-fns';
 import { ConfiguracaoService } from './../configuracao/configuracao.service';
 import { EmailService } from './../email/email.service';
 /* eslint-disable prefer-spread */
@@ -13,6 +14,7 @@ import { Interno } from 'src/model/interno.model';
 import { Registro } from 'src/model/registro.model';
 import { Aluno } from 'src/model/aluno.model';
 import { PaginateItemColumnDto } from 'src/dto/paginate.item.column';
+import { Between } from 'typeorm';
 
 @Injectable()
 export class AgendaService extends ServiceBase<any> {
@@ -34,7 +36,33 @@ export class AgendaService extends ServiceBase<any> {
         registro.conteudo = dto.html;
         registro.aluno = new Aluno();
         registro.aluno.id = dto.id;
+        registro.alunoPresente = dto.status
+
+        if(!dto.status)
+            registro.conteudo = 'O aluno não compareceu neste dia.'
+
         return registro;
+    }
+
+    public async agendasHoje() {
+        let data = new Date();
+        data = this.withoutTime(data);
+
+        const agendas = await this.repository.find({
+            where: {
+                dataEscrita: Between(startOfDay(data).toISOString(), endOfDay(data).toISOString()), 
+            }
+        });
+
+        let totalAgendas = 0;
+        agendas.forEach(e => totalAgendas += e.registros.length);
+
+        return totalAgendas;
+    }
+
+    private withoutTime(data: Date) : Date {
+        data.setHours(0, 0, 0, 0);
+        return data;
     }
 
     public async enviaEmailResponsavelAlunos(alunosId: number[]) {
@@ -82,10 +110,10 @@ export class AgendaService extends ServiceBase<any> {
         return agenda;
     }
 
-    public async alunosPorAgenda(turmaId: number) {
+    public async alunosPorAgenda(agendaId: number) {
         const alunos = await this.registroRepository.createQueryBuilder('registro')
             .innerJoinAndSelect('registro.aluno', 'aluno')
-            .where('registro.agenda.id = :id', { id: turmaId })
+            .where('registro.agenda.id = :id', { id: agendaId })
             .getMany();
 
         return alunos;

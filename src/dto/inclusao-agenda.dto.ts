@@ -3,4 +3,5 @@ export class InclusaoAgendaDto {
     id: number;
     html: string;
     dataInclusao: Date;
+    status: boolean;
 }

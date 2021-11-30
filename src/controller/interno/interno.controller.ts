@@ -22,7 +22,8 @@ export class InternoController extends ControllerBase<Interno> {
         public responsavelService: ResponsavelService,
         public recadoService: RecadoService,
         public registroService: RegistroService,
-        public turmaService: TurmaService) {
+        public turmaService: TurmaService,
+        public agendaService: AgendaService) {
         super(service);
     }
 
@@ -62,5 +63,16 @@ export class InternoController extends ControllerBase<Interno> {
         })
 
         return dashboard;
+    }
+
+    @Get('/dashboard/agendasHoje')
+    async agendasHoje() {
+        const alunosTotal = await this.alunoService.count();
+        const agendasHoje = await this.agendaService.agendasHoje();
+        const porcentagem = `${((agendasHoje / alunosTotal) * 100).toFixed(2)}%`;
+
+        return {
+            alunosTotal, agendasHoje, porcentagem
+        }
     }
 }
