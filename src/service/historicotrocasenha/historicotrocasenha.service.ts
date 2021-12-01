@@ -39,7 +39,7 @@ export class HistoricotrocasenhaService extends ServiceBase<HistoricoTrocaSenha>
         const token = Math.floor(100000 + Math.random() * 900000);
         const titulo = "DEFINIÇÃO DE SENHA SGBE | " + token;
         
-        const linkTrocaSenha = await this.configuracaoService.getByNome('url_troca_senha');
+        const linkTrocaSenha = await (await this.configuracaoService.getByNome('url_troca_senha')).valor;
 
         const curdate = new Date();
         curdate.setMinutes(curdate.getMinutes() + 30);
